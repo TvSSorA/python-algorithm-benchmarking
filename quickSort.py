@@ -1,19 +1,41 @@
-def partition(arr: list[int], low: int, high: int) -> int:
-    pivot = arr[high]
-    i = low - 1
+def quickSort(arr: list[int]) -> list[int]:
+    less = []
+    equal = []
+    greater = []
 
-    for j in range(low, high):
-        if arr[j] <= pivot:
-            i += 1
+    if len(arr) > 1:
+        pivot = arr[-1]
+        for x in arr:
+            if x < pivot:
+                less.append(x)
+            elif x == pivot:
+                equal.append(x)
+            else:
+                greater.append(x)
+            
+        return quickSort(less) + equal + quickSort(greater)
+    else:
+        return arr
 
-            if j > i:
-                arr[i], arr[j] = arr[j], arr[i]
+def partition(arr: list[int], start: int, end: int) -> int:
+    i, j = start, end
+    pivot = arr[end]
     
-    return i
+    while (i < j):
+        while (arr[i] < pivot):
+            i += 1
+        while (arr[j] > pivot):
+            j -= 1
+        if (i < j):
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+            j -= 1
 
-def quickSort(arr: list[int], low: int, high: int) -> list[int]:
-     if low < high:
-        pivot = partition(arr, low, high)
+    return i 
 
-        quickSort(arr, low, pivot - 1)
-        quickSort(arr, pivot + 1, high)
+def quicksortalt(arr: list[int], start: int, end: int):
+    if start < end:
+        pivot = partition(arr, 0, len(arr) - 1)
+        quicksortalt(arr, start, pivot - 1)
+        quicksortalt(arr, pivot + 1, end)   
+    return arr
