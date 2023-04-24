@@ -1,5 +1,5 @@
 from math import ceil
-from countingSort import countingSort
+from radixSort import radixSort
 
 def bucketSort(arr):
     bucketSize = 5
@@ -11,7 +11,7 @@ def bucketSort(arr):
         buckets[ceil(num / bucketSize) - 1].append(num)
     
     for i in range(len(buckets)):
-        buckets[i] = countingSort(buckets[i])
+        buckets[i] = radixSort(buckets[i])
     
     res = []
     for bucket in buckets:
