@@ -15,12 +15,11 @@ from numpy import format_float_positional
 testData = [i for i in range(1, 10001)]
 shuffle(testData)
 
-clone = testData[::]
-
-
 results = {}            
 
 def sortThem(algo):
+    clone = testData[::]
+    
     startTime = default_timer()
     res = algo(clone)
     
